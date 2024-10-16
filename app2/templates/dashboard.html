@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>巨軟系統儀表板</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 3rem;
+        }
+        .card {
+            margin-top: 1rem;
+        }
+        #server-status {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">巨軟系統儀表板</h1>
+        <h2 class="text-center">歡迎, {{ current_user.username }} !</h2>
+        
+        <div class="d-flex justify-content-end">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{{ url_for('logout') }}" class="btn btn-danger">登出</a>
+                <a href="{{ url_for('home') }}" class="btn btn-info">主頁</a>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                下載區域
+            </div>
+            <div class="card-body">
+                <form action="/download" method="POST">
+                    <button class="btn btn-info" type="submit">下載模組</button>
+                </form>
+                <p class="mt-3">Java8 for win10/11: <a href="https://www.java.com/zh-TW/download/ie_manual.jsp?locale=zh_TW" target="_blank">下載連結</a></p>
+                <p>Java8 for mac: <a href="https://javadl.oracle.com/webapps/download/AutoDL?BundleId=249841_43d62d619be4e416215729597d70b8ac" target="_blank">下載連結</a></p>
+                <p>Minecraft Forge - MC 1.20.1: <a href="https://files.minecraftforge.net/net/minecraftforge/forge/index_1.20.1.html" target="_blank">下載連結</a></p>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                伺服器狀態
+            </div>
+            <div class="card-body text-center">
+                <button class="btn btn-info" onclick="checkServerStatus()">檢查 Minecraft 伺服器狀態</button>
+                <div id="server-status" class="alert mt-3" role="alert"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/scripts.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

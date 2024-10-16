@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ video_title }}</title>
+    <style>
+        /* 全局樣式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* 置頂導航樣式 */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ddd;
+        }
+
+        .user-info {
+            color: white;
+        }
+
+        /* 影片播放區域樣式 */
+        section {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        section h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        section p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 置頂導航選擇區域 -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">首頁</a></li>
+            <li><a href="{{ url_for('video') }}">所有影片</a></li>
+        </ul>
+
+        <!-- 當用戶登入時顯示用戶名稱 -->
+        {% if current_user.is_authenticated %}
+        <div class="user-info">
+            歡迎, {{ current_user.username }}!
+        </div>
+        {% endif %}
+    </nav>
+
+    <!-- 影片播放區域 -->
+    <section>
+        <h1>{{ video_title }}</h1>
+        <p>{{ video_description }}</p>
+        <!-- 視頻嵌入區 -->
+        <video controls>
+            <source src="{{ url_for('static', filename=video_file) }}" type="video/mp4">
+            您的瀏覽器不支援視頻播放。
+        </video>
+    </section>
+</body>
+</html>
